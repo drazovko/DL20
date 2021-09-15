@@ -12,6 +12,9 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 import hr.foi.air.discountlocator.fragments.DiscountListFragment;
 
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         displayMainFragment();
+
+        AppCenter.start(getApplication(), "18f20bda-d034-4acd-82b6-9b502301646d",
+                Analytics.class, Crashes.class);
     }
 
     private void displayMainFragment()
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        Analytics.trackEvent("Prikazan glavni fragment");
     }
 
     @Override
